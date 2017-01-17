@@ -38,6 +38,6 @@ for line in lines:
     mention = re.match(r'.*incident*', line.text)
     #if mention exists (there was a match, and it was created)
     if mention:
-      print line.text
+      print line.text.encode('ascii', 'ignore')
 
 
