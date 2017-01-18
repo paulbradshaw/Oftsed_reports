@@ -67,3 +67,4 @@ def scrapepdf(url):
   scraperwiki.sqlite.save(['reportline'],record)
 
 scrapepdf(url)
+#
