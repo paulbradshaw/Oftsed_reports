@@ -47,7 +47,7 @@ def scrapepdf(url):
     if i.attrib.get('font') == "2":
       print 'DATE MATCH on FONT? ', i.text.encode('ascii','ignore')
     if i is not None:
-      print 'DATE MATCH? ', i.text.encode('ascii','ignore')
+      print 'DATE MATCH? ', i.text #.encode('ascii','ignore')
 
   #loop through each item in 'lines'
   for line in lines:
