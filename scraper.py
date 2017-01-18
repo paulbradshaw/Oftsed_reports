@@ -32,8 +32,8 @@ record = {}
 #We try to identify lines with font="4"
 schoolname = pdfroot.findall('.//text[@font="4"]')
 for name in schoolname:
-  print 'SCHOOL NAME? ', name
-  record['schoolname'] = name
+  print 'SCHOOL NAME? ', name.text
+  record['schoolname'] = name.text
 #loop through each item in 'lines'
 for line in lines:
   linenumber = linenumber+1
