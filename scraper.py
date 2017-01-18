@@ -28,12 +28,21 @@ lines = pdfroot.findall('.//text')
 linenumber = 0
 # create empty dictionary object which we'll fill with data as we go, then store
 record = {}
+
 #school name is in <text top="148" left="85" width="443" height="40" font="4">
 #We try to identify lines with font="4"
 schoolname = pdfroot.findall('.//text[@font="4"]')
 for name in schoolname:
-  print 'SCHOOL NAME? ', name.text
-  record['schoolname'] = name.text
+  #This line tests how many matches we get
+  print 'SCHOOL NAME? ', name.text.encode('ascii', 'ignore')
+#There's only one when tested, so let's store the first and only match
+record['schoolname'] = schoolname[0].text.encode('ascii', 'ignore')
+
+#Now the date, which is in <text top="224" left="661" width="147" height="18" font="2"
+dateinspected = pdfroot.findall('.//text[@top="224"]')
+for i in dateinspected:
+  print i.text.encode('ascii','ignore')
+
 #loop through each item in 'lines'
 for line in lines:
   linenumber = linenumber+1
@@ -44,6 +53,7 @@ for line in lines:
     mention = re.match(r'.*incident*', line.text)
     #if mention exists (there was a match, and it was created)
     if mention:
+      #we add .encode to avoid any unicode-related errors
       print line.text.encode('ascii', 'ignore')
       record['text'] = line.text.encode('ascii', 'ignore')
 
