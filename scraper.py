@@ -44,10 +44,8 @@ def scrapepdf(url):
 #  dateinspected2 = pdfroot.findall('.//text[@font="2"]')
   for i in dateinspected:
     print i.attrib.get('font')
-    if i.attrib.get('font') == "2":
+    if i.attrib.get('font') == "2" and if i is not None:
       print 'DATE MATCH on FONT? ', i.text.encode('ascii','ignore')
-    if i is not None:
-      print 'DATE MATCH? ', i.text #.encode('ascii','ignore')
 
   #loop through each item in 'lines'
   for line in lines:
