@@ -38,6 +38,7 @@ def scrapepdf(url):
   record['schoolname'] = schoolname[0].text.encode('ascii', 'ignore')
 
   #Now the date, which is in <text top="224" left="661" width="147" height="18" font="2"
+  #This looks for TWO attributes
   dateinspected = pdfroot.findall('.//text[@top="224"and @font="2"]')
   for i in dateinspected:
     if i is not None:
