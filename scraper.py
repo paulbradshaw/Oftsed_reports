@@ -28,6 +28,10 @@ lines = pdfroot.findall('.//text')
 linenumber = 0
 # create empty dictionary object which we'll fill with data as we go, then store
 record = {}
+#school name is in <text top="148" left="85" width="443" height="40" font="4">
+schoolname = pdfroot.findall('.//text[@font="4"]')
+for name in schoolname:
+  print 'SCHOOL NAME? ', name.text.encode('ascii', 'ignore')
 #loop through each item in 'lines'
 for line in lines:
   linenumber = linenumber+1
@@ -39,5 +43,6 @@ for line in lines:
     #if mention exists (there was a match, and it was created)
     if mention:
       print line.text.encode('ascii', 'ignore')
+      record['text'] = line.text.encode('ascii', 'ignore')
 
 
