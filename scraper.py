@@ -41,12 +41,14 @@ record['schoolname'] = schoolname[0].text.encode('ascii', 'ignore')
 #Now the date, which is in <text top="224" left="661" width="147" height="18" font="2"
 dateinspected = pdfroot.findall('.//text[@top="224"]')
 for i in dateinspected:
-  print i.text.encode('ascii','ignore')
+  if i is not None:
+    print 'DATE MATCH? ', i.text.encode('ascii','ignore')
 
 #loop through each item in 'lines'
 for line in lines:
   linenumber = linenumber+1
   #we are not interested in lines that are empty, so this if test ensures the line after only runs if it's not empty
+  #Otherwise we might get AttributeError: 'NoneType' object has no attribute 'encode'
   if line.text is not None:
     #use regex to look for any or no character(s) followed by the string 'incident'
     #followed by any or no character(s) - the result is stored in 'mention'
