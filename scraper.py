@@ -39,8 +39,9 @@ def scrapepdf(url):
 
   #Now the date, which is in <text top="224" left="661" width="147" height="18" font="2"
   #This looks for TWO attributes
-  dateinspected = pdfroot.findall('.//text[@top="224"and @font="2"]')
-  for i in dateinspected:
+  dateinspected = pdfroot.findall('.//text[@top="224"]')
+  dateinspected2 = dateinspected.findall('.//text[@font="2"]')
+  for i in dateinspected2:
     if i is not None:
       print 'DATE MATCH? ', i.text.encode('ascii','ignore')
 
