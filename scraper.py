@@ -7,7 +7,6 @@ import lxml.html
 import requests
 
 # Read in a page
-#html = scraperwiki.scrape("https://reports.ofsted.gov.uk/provider/files/2631211/urn/103980.pdf")
 url = "https://reports.ofsted.gov.uk/provider/files/2631211/urn/103980.pdf"
 
 def scrapepdf(url):
