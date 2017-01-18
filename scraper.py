@@ -60,11 +60,14 @@ def scrapepdf(url):
       if mention:
         #we add .encode to avoid any unicode-related errors
         print line.text.encode('ascii', 'ignore')
+        record['url'] = url
         record['text'] = line.text.encode('ascii', 'ignore')
         record['reportline'] = url+str(linenumber)
-  record['url'] = url
-  print 'ALL DATA: ', record
-  scraperwiki.sqlite.save(['reportline'],record)
+        print 'ALL DATA: ', record
+        scraperwiki.sqlite.save(['reportline'],record)
+  
+  
+  
 
 scrapepdf(url)
 #
