@@ -6,22 +6,7 @@ import lxml.etree
 import lxml.html
 import requests
 
-#Some example URLs
-schoolurl = "https://reports.ofsted.gov.uk/inspection-reports/find-inspection-report/provider/ELS/140407"
-pdfurl = "https://reports.ofsted.gov.uk/provider/files/2631211/urn/103980.pdf"
-searchurl = "https://reports.ofsted.gov.uk/inspection-reports/find-inspection-report/results/any/21/any/any/any/any/any/any/any/week/0/0#search4"
 
-# Read in a page
-html = requests.get(searchurl).content
-#convert to lxml object
-root = lxml.html.fromstring(html)
-#grab any content that is within <h2> AND <a ...>
-schoollinks = root.cssselect('h2 a')
-for link in schoollinks:
-    #print the HTML text 
-    print link.text
-    #print the href = attribute (the link URL)
-    print link.attrib.get('href')
 
 # Read in a page
 #html = scraperwiki.scrape("https://reports.ofsted.gov.uk/provider/files/2631211/urn/103980.pdf")
@@ -89,3 +74,35 @@ def scrapepdf(url):
 
 scrapepdf(url)
 #
+#Some example URLs
+schoolurleg = "https://reports.ofsted.gov.uk/inspection-reports/find-inspection-report/provider/ELS/140407"
+pdfurleg = "https://reports.ofsted.gov.uk/provider/files/2631211/urn/103980.pdf"
+searchurl = "https://reports.ofsted.gov.uk/inspection-reports/find-inspection-report/results/any/21/any/any/any/any/any/any/any/week/0/0#search4"
+
+def scrapeschoolpage(schoolurl):
+    print 'RUNNING'
+    schoolhtml = requests.get(schoolurl).content
+    root = lxml.html.fromstring(schoolhtml)
+    pdflinks = root.cssselect('div.download-report-link a')
+    for link in pdflinks:
+        print link.text
+        print link.attrib.get('href')
+        #results are like: /inspection-reports/find-inspection-report/provider/ELS/103927
+        pdfurl = 'https://reports.ofsted.gov.uk'+link.attrib.get('href')
+        print 'FULL PDF LINK: ', pdfurl
+        scrapepdf(pdfurl)
+        
+
+# Read in a page
+html = requests.get(searchurl).content
+#html2 = scraperwiki.scrape(html)
+#convert to lxml object
+root = lxml.html.fromstring(html)
+schoollinks = root.cssselect('h2 a')
+for link in schoollinks:
+    print link.text
+    print link.attrib.get('href')
+    #results are like: /inspection-reports/find-inspection-report/provider/ELS/103927
+    schoolurl = 'https://reports.ofsted.gov.uk'+link.attrib.get('href')
+    print 'FULL SCHOOL LINK: ', schoolurl
+    scrapeschoolpage(schoolurl)
