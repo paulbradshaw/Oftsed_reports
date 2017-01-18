@@ -38,7 +38,8 @@ def scrapepdf(url):
   record['schoolname'] = schoolname[0].text.encode('ascii', 'ignore')
 
   #Now the date, which is in <text top="224" left="661" width="147" height="18" font="2"
-  #This looks for TWO attributes
+  #We could look for TWO attributes using AND but this generates an error in lxml
+  #So we might find another way to test either criteria
   dateinspected = pdfroot.findall('.//text[@top="224"]')
   dateinspected2 = pdfroot.findall('.//text[@font="2"]')
   for i in dateinspected2:
