@@ -4,6 +4,24 @@ import scraperwiki
 import urllib2
 import lxml.etree
 import lxml.html
+import requests
+
+#Some example URLs
+schoolurl = "https://reports.ofsted.gov.uk/inspection-reports/find-inspection-report/provider/ELS/140407"
+pdfurl = "https://reports.ofsted.gov.uk/provider/files/2631211/urn/103980.pdf"
+searchurl = "https://reports.ofsted.gov.uk/inspection-reports/find-inspection-report/results/any/21/any/any/any/any/any/any/any/week/0/0#search4"
+
+# Read in a page
+html = requests.get(searchurl).content
+#convert to lxml object
+root = lxml.html.fromstring(html)
+#grab any content that is within <h2> AND <a ...>
+schoollinks = root.cssselect('h2 a')
+for link in schoollinks:
+    #print the HTML text 
+    print link.text
+    #print the href = attribute (the link URL)
+    print link.attrib.get('href')
 
 # Read in a page
 #html = scraperwiki.scrape("https://reports.ofsted.gov.uk/provider/files/2631211/urn/103980.pdf")
