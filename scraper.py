@@ -10,7 +10,6 @@ import requests
 #html = scraperwiki.scrape("https://reports.ofsted.gov.uk/provider/files/2631211/urn/103980.pdf")
 url = "https://reports.ofsted.gov.uk/provider/files/2631211/urn/103980.pdf"
 
-
 def scrapepdf(url):
   pdfdata = urllib2.urlopen(url).read()
   print "The pdf file has %d bytes" % len(pdfdata)
@@ -72,7 +71,7 @@ def scrapepdf(url):
   
 
 scrapepdf(url)
-#
+
 #Some example URLs
 schoolurleg = "https://reports.ofsted.gov.uk/inspection-reports/find-inspection-report/provider/ELS/140407"
 pdfurleg = "https://reports.ofsted.gov.uk/provider/files/2631211/urn/103980.pdf"
