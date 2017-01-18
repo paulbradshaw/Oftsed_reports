@@ -35,10 +35,11 @@ def scrapepdf(url):
   #We try to identify lines with font="4"
   schoolname = pdfroot.findall('.//text[@font="4"]')
   for name in schoolname:
+    if name is not None:
     #This line tests how many matches we get
-    print 'SCHOOL NAME? ', name.text.encode('ascii', 'ignore')
+      print 'SCHOOL NAME? ', name.text.encode('ascii', 'ignore')
   #There's only one when tested, so let's store the first and only match
-  record['schoolname'] = schoolname[0].text.encode('ascii', 'ignore')
+      record['schoolname'] = schoolname[0].text.encode('ascii', 'ignore')
 
   #Now the date, which is in <text top="224" left="661" width="147" height="18" font="2"
   #We could look for TWO attributes using './/text[@top="224" and font="2"]' but this generates an error in lxml
