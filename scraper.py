@@ -40,9 +40,12 @@ def scrapepdf(url):
   #Now the date, which is in <text top="224" left="661" width="147" height="18" font="2"
   #We could look for TWO attributes using './/text[@top="224" and font="2"]' but this generates an error in lxml
   #So we might find another way to test either criteria
-  dateinspected = pdfroot.findall('.//text[@top="224"]').attrib.get('font')
+  dateinspected = pdfroot.findall('.//text[@top="224"]')
 #  dateinspected2 = pdfroot.findall('.//text[@font="2"]')
   for i in dateinspected:
+    print i.attrib.get('font')
+    if i.attrib.get('font') == "2":
+      print 'DATE MATCH on FONT? ', i.text.encode('ascii','ignore')
     if i is not None:
       print 'DATE MATCH? ', i.text.encode('ascii','ignore')
 
