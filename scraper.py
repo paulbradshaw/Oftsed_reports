@@ -60,7 +60,7 @@ def scrapepdf(url):
     if line.text is not None:
       #use regex to look for any or no character(s) followed by the string 'incident'
       #followed by any or no character(s) - the result is stored in 'mention'
-      mention = re.match(r'.*incident*', line.text)
+      mention = re.match(r'.*bullying*', line.text)
       #if mention exists (there was a match, and it was created)
       if mention:
         #we add .encode to avoid any unicode-related errors
