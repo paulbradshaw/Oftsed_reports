@@ -36,7 +36,8 @@ def scrapepdf(url):
     #This line tests how many matches we get
       print 'SCHOOL NAME? ', name.text.encode('ascii', 'ignore')
   #There's only one when tested, so let's store the first and only match
-      record['schoolname'] = schoolname[0] #.text.encode('ascii', 'ignore')
+  #see https://docs.python.org/2/howto/unicode.html for more on .encode('ascii', 'xmlcharrefreplace')
+      record['schoolname'] = schoolname[0].text.encode('ascii', 'xmlcharrefreplace')
     except AttributeError:
       print 'AttributeError - ignored'
 
