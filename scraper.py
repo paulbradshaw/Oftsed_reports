@@ -63,6 +63,21 @@ def scrapepdf(url):
       mention = re.match(r'.*bullying*', line.text)
       #if mention exists (there was a match, and it was created)
       if mention:
+        #print the line numbers just before and after
+        print range(linenumber-2,linenumber+1)
+        #create 2 variables to store those lines for now - but have some default text
+        linebefore = "EMPTY LINE"
+        lineafter = "EMPTY LINE"
+        incontextlist = []
+        if pdfroot.xpath('.//text')[linenumber-2].text:
+          linebefore = pdfroot.xpath('.//text')[linenumber-2].text
+          incontextlist.append(linebefore)
+          incontextlist.append(pdfroot.xpath('.//text')[linenumber-1].text)
+        if pdfroot.xpath('.//text')[linenumber].text is not None:
+          lineafter = pdfroot.xpath('.//text')[linenumber].text
+          incontextlist.append(lineafter)
+        record["mention in context"] = ''.join(incontextlist)
+        record["linenumber"] = linenumber
         #we add .encode to avoid any unicode-related errors
         print line.text.encode('ascii', 'ignore')
         record['url'] = url
